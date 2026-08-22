@@ -55,6 +55,11 @@ const brandIcons: Record<string, (className: string) => JSX.Element> = {
       <path d="M10.5 9.5l5 2.5-5 2.5v-5z" fill="currentColor" stroke="none" />
     </svg>
   ),
+  facebook: (className) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} className={className} aria-hidden="true">
+      <path d="M14 8.5h2.5V5.5h-2.5c-2 0-3.5 1.5-3.5 3.5v2H8.5v3H11v7h2.5v-7h2.2l.5-3h-2.7v-2c0-.6.4-1 1-1z" fill="currentColor" stroke="none" />
+    </svg>
+  ),
 };
 
 interface IconProps {

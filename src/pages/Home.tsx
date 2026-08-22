@@ -9,6 +9,7 @@ import ProcessTimeline from '../components/ProcessTimeline';
 import TrustBar from '../components/TrustBar';
 import EligibilityCheck from '../components/EligibilityCheck';
 import SuccessStoryCard from '../components/SuccessStoryCard';
+import SocialGallery from '../components/SocialGallery';
 import CTASection from '../components/CTASection';
 import ContactForm from '../components/ContactForm';
 import Icon from '../components/Icon';
@@ -188,6 +189,19 @@ export default function Home() {
               <SuccessStoryCard key={t.youtubeId} {...t} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Social Gallery */}
+      <section className="bg-paper-dim py-20 sm:py-28">
+        <div className="container-page flex flex-col gap-12">
+          <SectionHeading
+            eyebrow="Follow Us"
+            heading="Latest From Instagram & Facebook"
+            description="A running feed of our recent posts, events and student updates."
+            align="center"
+          />
+          <SocialGallery />
         </div>
       </section>
 

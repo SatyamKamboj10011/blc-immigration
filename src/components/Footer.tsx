@@ -33,6 +33,15 @@ export default function Footer() {
             >
               <Icon name="youtube" className="h-4 w-4" />
             </a>
+            <a
+              href={socialLinks.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="BLC on Facebook"
+              className="focus-ring flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-brand-200 transition-colors hover:border-white/40 hover:text-white"
+            >
+              <Icon name="facebook" className="h-4 w-4" />
+            </a>
           </div>
         </div>
 

@@ -19,7 +19,15 @@ export const socialLinks = {
   // Confirmed video from BLC's channel — used since the exact channel handle
   // could not be independently verified.
   youtube: 'https://www.youtube.com/watch?v=iz0ZlrrDy_A',
+  // TODO: replace with BLC's actual Facebook page URL.
+  facebook: 'https://www.facebook.com/blossomlearningcentre/',
 };
+
+// Public Instagram posts to feature in the "Follow Us" gallery, via
+// Instagram's official oEmbed embed — no account login required since these
+// are public post URLs. Update this list whenever there's a new post to
+// feature (grab the post's permalink, e.g. https://www.instagram.com/p/POST_ID/).
+export const instagramPosts: string[] = [];
 
 export const navLinks = [
   { label: 'Home', to: '/' },
