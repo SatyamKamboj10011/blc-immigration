@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
+import Icon from './Icon';
 import { destinations, services } from '../data/site';
 
 const programOptions = services.map((s) => s.shortTitle);
@@ -30,31 +31,33 @@ export default function QuickSearchBar() {
         <p className="hidden shrink-0 pl-2 text-xs font-semibold uppercase tracking-wide text-brand-500 sm:block">
           Trusted by students across <span className="text-gold-700">multiple destinations</span>
         </p>
-        <label className="flex-1">
+        <label className="relative flex-1">
           <span className="sr-only">Choose destination</span>
           <select
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
-            className="focus-ring w-full rounded-full border border-brand-900/15 bg-paper px-4 py-2.5 text-sm font-medium text-brand-900"
+            className="focus-ring w-full appearance-none rounded-full border border-brand-900/15 bg-paper px-4 py-2.5 pr-9 text-sm font-medium text-brand-900"
           >
             <option value="">Select Country</option>
             {destinations.map((d) => (
               <option key={d.slug} value={d.name}>{d.name}</option>
             ))}
           </select>
+          <Icon name="chevron-down" className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-500" />
         </label>
-        <label className="flex-1">
+        <label className="relative flex-1">
           <span className="sr-only">Choose program</span>
           <select
             value={program}
             onChange={(e) => setProgram(e.target.value)}
-            className="focus-ring w-full rounded-full border border-brand-900/15 bg-paper px-4 py-2.5 text-sm font-medium text-brand-900"
+            className="focus-ring w-full appearance-none rounded-full border border-brand-900/15 bg-paper px-4 py-2.5 pr-9 text-sm font-medium text-brand-900"
           >
             <option value="">Pick Your Program</option>
             {programOptions.map((p) => (
               <option key={p} value={p}>{p}</option>
             ))}
           </select>
+          <Icon name="chevron-down" className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-brand-500" />
         </label>
         <Button type="submit" variant="accent" className="sm:shrink-0">
           Send Request

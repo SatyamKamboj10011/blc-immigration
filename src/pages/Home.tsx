@@ -40,7 +40,6 @@ export default function Home() {
         supportingText="From choosing the right destination to securing your visa, BLC helps you achieve your international education dream with personalised support and expert advice."
         image="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80"
         imageAlt="International student ready to study abroad"
-        stub
         actions={
           <>
             <Button to="/contact" size="lg" variant="accent">Get Free Counselling</Button>

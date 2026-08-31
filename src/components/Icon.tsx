@@ -2,6 +2,7 @@ import {
   ArrowRight,
   BookOpen,
   Check,
+  ChevronDown,
   Clipboard,
   Compass,
   Globe2,
@@ -38,6 +39,7 @@ const icons: Record<string, LucideIcon> = {
   close: X,
   quote: Quote,
   star: Star,
+  'chevron-down': ChevronDown,
 };
 
 // Official brand marks — not part of lucide-react, kept minimal and exact.

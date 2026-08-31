@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import Icon from './Icon';
 
 interface HeroProps {
   eyebrow?: string;
@@ -9,10 +8,9 @@ interface HeroProps {
   imageAlt: string;
   actions?: ReactNode;
   compact?: boolean;
-  stub?: boolean;
 }
 
-export default function Hero({ eyebrow, headline, supportingText, image, imageAlt, actions, compact, stub }: HeroProps) {
+export default function Hero({ eyebrow, headline, supportingText, image, imageAlt, actions, compact }: HeroProps) {
   return (
     <section className="relative overflow-hidden bg-white">
       <div
@@ -40,16 +38,6 @@ export default function Hero({ eyebrow, headline, supportingText, image, imageAl
           <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-full bg-brand-700/10 sm:max-w-lg">
             <img src={image} alt={imageAlt} className="h-full w-full object-cover" loading="eager" />
           </div>
-          {stub && (
-            <div className="absolute -bottom-2 left-0 hidden rounded-2xl border border-brand-900/10 bg-white px-5 py-4 shadow-card-hover sm:block">
-              <p className="eyebrow text-gold-700">Guiding You To</p>
-              <div className="mt-1 flex items-center gap-2 font-display text-lg font-extrabold text-brand-950">
-                <span>LDW</span>
-                <Icon name="arrow" className="h-4 w-4 text-gold-700" />
-                <span>Abroad</span>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </section>
