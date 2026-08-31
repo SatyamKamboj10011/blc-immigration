@@ -1,6 +1,33 @@
 # Blossom Learning Centre — Website
 
-React + TypeScript + Vite + Tailwind CSS.
+The public website for Blossom Learning Centre (BLC), a study-abroad and immigration
+consultancy in Ladwa, Kurukshetra, Haryana — student visa guidance, immigration
+consultancy, and IELTS/PTE/Spoken English preparation.
+
+React + TypeScript + Vite + Tailwind CSS. No backend server — enquiries flow straight
+into a Google Sheet, and the whole site deploys as static assets.
+
+## Screenshots
+
+| Home | Student Visa |
+|---|---|
+| ![Homepage](docs/screenshots/home.png) | ![Student Visa page](docs/screenshots/student-visa.png) |
+
+| Exam Strategies | Contact |
+|---|---|
+| ![Exam Strategies page](docs/screenshots/exam-strategies.png) | ![Contact page](docs/screenshots/contact.png) |
+
+## Features
+
+- Service pages for student visa guidance, immigration consultancy, and IELTS/PTE/Spoken
+  English, plus country pages for Australia, the UK, New Zealand and Canada
+- An IELTS/PTE exam-strategy resource page with real, module-by-module technique guidance
+- Contact form, "Request a Call Back" popup, and newsletter signup — all three feed one
+  Google Sheet with a `Source` column so submissions are easy to tell apart
+- A floating WhatsApp button and a rule-based "Quick Help" widget that answers common
+  questions from the site's own data (not an AI chatbot — see `src/components/ChatWidget.tsx`)
+- Privacy Policy, Terms & Conditions, and Refund Policy pages
+- A "Meet the Directors" leadership section on the About page
 
 ## Development
 
@@ -31,10 +58,9 @@ npm run dev
    results, with real student names). Add more as new videos are published, or replace with
    written quotes if BLC obtains permissioned text testimonials.
 5. **Social links** — `src/data/site.ts` (`socialLinks`) links to BLC's verified Instagram
-   (@blossom_learning_centre) and a confirmed YouTube video. If BLC has an official YouTube
-   channel handle or a working Facebook page, swap those in.
+   (@blossom_learning_centre), YouTube, and Facebook. Update if any of these ever change.
 6. **Images** — hero and destination images use royalty-free Unsplash stock photography.
-   Swap in real photos of the centre, staff or (with permission) students for more authenticity.
+   Swap in real photos of the centre or (with permission) students for more authenticity.
 7. **Contact details** — phone, email and address in `src/data/site.ts` (`siteInfo`) were
    pulled from the live BLC site at build time; double-check they're still current.
 
@@ -66,3 +92,4 @@ npm run preview
 - `src/lib/submitEnquiry.ts` — contact form submit handler (Google Sheets-backed)
 - `google-apps-script.gs` — script to paste into Google Apps Script (see setup steps in the file)
 - `src/lib/analytics.ts` — optional GA4 integration
+- `docs/screenshots/` — images used in this README
