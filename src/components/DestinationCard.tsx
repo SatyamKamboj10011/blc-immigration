@@ -23,9 +23,9 @@ export default function DestinationCard({ name, description, image, to }: Destin
       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
 
       <div className="relative flex flex-col gap-1.5 p-6 text-white">
-        <h3 className="font-display text-xl font-semibold">{name}</h3>
-        <p className="text-sm text-brand-100/90">{description}</p>
-        <span className="link-underline mt-2 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-gold-400">
+        <h3 className="font-display text-xl font-extrabold uppercase tracking-tight">{name}</h3>
+        <p className="text-sm text-white/80">{description}</p>
+        <span className="link-underline mt-2 inline-flex w-fit items-center gap-1.5 text-sm font-bold uppercase tracking-wide text-gold-400">
           Explore
           <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </span>

@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import CallbackPanel from './CallbackPanel';
+import ChatWidget from './ChatWidget';
 import { trackPageview } from '../lib/analytics';
 
 interface LayoutProps {
@@ -38,6 +39,7 @@ export default function Layout({ children, title, description }: LayoutProps) {
       <Footer />
       <CallbackPanel />
       <WhatsAppButton />
+      <ChatWidget />
     </div>
   );
 }

@@ -32,15 +32,15 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Fraunces', 'ui-serif', 'serif'],
+        display: ['"Archivo"', 'system-ui', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
-        card: '0 1px 2px rgba(0, 35, 19, 0.06)',
-        'card-hover': '0 10px 24px rgba(0, 35, 19, 0.12)',
+        card: '0 1px 2px rgba(10, 10, 10, 0.06)',
+        'card-hover': '0 14px 28px rgba(10, 10, 10, 0.14)',
       },
       borderRadius: {
-        xl2: '0.375rem',
+        xl2: '1.25rem',
       },
     },
   },

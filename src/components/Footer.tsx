@@ -20,7 +20,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="BLC on Instagram"
-              className="focus-ring flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-brand-200 transition-colors hover:border-white/40 hover:text-white"
+              className="focus-ring flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-brand-200 transition-colors hover:border-gold-500 hover:bg-gold-500 hover:text-brand-950"
             >
               <Icon name="instagram" className="h-4 w-4" />
             </a>
@@ -29,7 +29,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="BLC on YouTube"
-              className="focus-ring flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-brand-200 transition-colors hover:border-white/40 hover:text-white"
+              className="focus-ring flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-brand-200 transition-colors hover:border-gold-500 hover:bg-gold-500 hover:text-brand-950"
             >
               <Icon name="youtube" className="h-4 w-4" />
             </a>
@@ -38,7 +38,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="BLC on Facebook"
-              className="focus-ring flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-brand-200 transition-colors hover:border-white/40 hover:text-white"
+              className="focus-ring flex h-9 w-9 items-center justify-center rounded-md border border-white/15 text-brand-200 transition-colors hover:border-gold-500 hover:bg-gold-500 hover:text-brand-950"
             >
               <Icon name="facebook" className="h-4 w-4" />
             </a>
@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="eyebrow mb-4 text-white/70">Quick Links</h3>
+          <h3 className="eyebrow mb-4 text-gold-500">Quick Links</h3>
           <ul className="flex flex-col gap-2.5 text-sm text-brand-200">
             <li><Link className="focus-ring rounded hover:text-white" to="/about">About Us</Link></li>
             <li><Link className="focus-ring rounded hover:text-white" to="/services">Services</Link></li>
@@ -57,7 +57,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="eyebrow mb-4 text-white/70">Services</h3>
+          <h3 className="eyebrow mb-4 text-gold-500">Services</h3>
           <ul className="flex flex-col gap-2.5 text-sm text-brand-200">
             {services.map((s) => (
               <li key={s.slug}>
@@ -70,7 +70,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="eyebrow mb-4 text-white/70">Study Destinations</h3>
+          <h3 className="eyebrow mb-4 text-gold-500">Study Destinations</h3>
           <ul className="mb-6 flex flex-col gap-2.5 text-sm text-brand-200">
             {destinations.map((d) => (
               <li key={d.slug}>
@@ -80,7 +80,7 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-          <h3 className="eyebrow mb-3 text-white/70">Contact</h3>
+          <h3 className="eyebrow mb-3 text-gold-500">Contact</h3>
           <ul className="flex flex-col gap-2.5 text-sm text-brand-200">
             <li className="flex items-center gap-2">
               <Icon name="phone" className="h-4 w-4 shrink-0 text-brand-300" />
@@ -99,9 +99,13 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-center justify-between gap-2 py-6 text-xs text-brand-300 sm:flex-row">
+        <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-brand-300 sm:flex-row">
           <p>© {new Date().getFullYear()} Blossom Learning Centre. All rights reserved. &middot; Designed by Satyam Kamboj</p>
-          <p>Ladwa, Haryana, India</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <Link className="focus-ring rounded hover:text-white" to="/privacy-policy">Privacy Policy</Link>
+            <Link className="focus-ring rounded hover:text-white" to="/terms-conditions">Terms &amp; Conditions</Link>
+            <Link className="focus-ring rounded hover:text-white" to="/refund-policy">Refund Policy</Link>
+          </div>
         </div>
       </div>
     </footer>

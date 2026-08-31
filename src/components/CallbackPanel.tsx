@@ -18,7 +18,14 @@ export default function CallbackPanel() {
     }
     setError('');
     setStatus('submitting');
-    await submitEnquiry({ name, phone, email: '', interestedIn: 'Call back request', message: 'Requested a call back.' });
+    await submitEnquiry({
+      source: 'Call Back Request',
+      name,
+      phone,
+      email: '',
+      interestedIn: 'Call back request',
+      message: 'Requested a call back.',
+    });
     setStatus('success');
   }
 

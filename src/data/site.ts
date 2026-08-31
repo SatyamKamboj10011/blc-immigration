@@ -12,6 +12,24 @@ export const siteInfo = {
   addressLine: 'Blossom Learning Centre, Ladwa, Kurukshetra, Haryana, India',
 };
 
+export interface LeadershipMember {
+  name: string;
+  title: string;
+  phone: string;
+  phoneHref: string;
+  photo?: string;
+}
+
+// Names and numbers confirmed directly from BLC's own Instagram
+// (instagram.com/p/DaxV3Gwp3f6/), which names both directors alongside
+// their contact numbers. Photos are cropped from BLC's own branded
+// promotional graphics (a YouTube channel banner for Viren, a visa-approval
+// congratulations post for Ankush — both explicitly labelled with their names).
+export const leadership: LeadershipMember[] = [
+  { name: 'Ankush Kamboj', title: 'Director', phone: '+91 94667 88470', phoneHref: 'tel:+919466788470', photo: '/ankush-kamboj.jpg' },
+  { name: 'Viren Zamba', title: 'Director', phone: '+91 98134 45290', phoneHref: 'tel:+919813445290', photo: '/viren-zamba.jpg' },
+];
+
 // Verified active accounts found independently (blcimmigration.com's own social
 // links were unconfigured placeholders, so these were sourced directly).
 export const socialLinks = {
@@ -19,15 +37,23 @@ export const socialLinks = {
   // Confirmed video from BLC's channel — used since the exact channel handle
   // could not be independently verified.
   youtube: 'https://www.youtube.com/watch?v=iz0ZlrrDy_A',
-  // TODO: replace with BLC's actual Facebook page URL.
-  facebook: 'https://www.facebook.com/blossomlearningcentre/',
+  // Confirmed by BLC directly.
+  facebook: 'https://www.facebook.com/people/Blossom-Learning-Centre/100064049287891/',
 };
 
-// Public Instagram posts to feature in the "Follow Us" gallery, via
-// Instagram's official oEmbed embed — no account login required since these
-// are public post URLs. Update this list whenever there's a new post to
-// feature (grab the post's permalink, e.g. https://www.instagram.com/p/POST_ID/).
-export const instagramPosts: string[] = [];
+// Public posts from @blossom_learning_centre, embedded via Instagram's
+// official embed.js widget — no login required since these are public post
+// permalinks. Each URL was verified by checking its og:url meta tag resolves
+// back to instagram.com/blossom_learning_centre/p/... before being added here.
+// Update this list whenever there's a new post to feature.
+export const instagramPosts: string[] = [
+  'https://www.instagram.com/p/DccsKBUJDFe/',
+  'https://www.instagram.com/p/DcVYSwMpHXZ/',
+  'https://www.instagram.com/p/Db7qM-1pAjG/',
+  'https://www.instagram.com/p/Db26-SPpJ1a/',
+  'https://www.instagram.com/p/DbAWH0mpl1s/',
+  'https://www.instagram.com/p/Da7N7kzpoCO/',
+];
 
 export const navLinks = [
   { label: 'Home', to: '/' },
@@ -35,6 +61,7 @@ export const navLinks = [
   { label: 'Services', to: '/services' },
   { label: 'Study Abroad', to: '/study-abroad' },
   { label: 'IELTS & PTE', to: '/services/ielts' },
+  { label: 'Exam Tips', to: '/exam-strategies' },
   { label: 'Success Stories', to: '/success-stories' },
   { label: 'Contact', to: '/contact' },
 ];
@@ -545,9 +572,249 @@ export const testimonials: VideoTestimonial[] = [
   { name: 'Reetu Devi', outcome: 'PTE: 73 in Writing, overall 65 — first attempt', youtubeId: '33FnOnBgR-k' },
 ];
 
+export interface FeatureItem {
+  title: string;
+  description: string;
+}
+
+// Concrete, checkable inclusions of BLC's service — shown as a checklist rather
+// than abstract claims, so prospective students know exactly what they get.
+export const serviceFeatures: FeatureItem[] = [
+  { title: 'Free Initial Consultation', description: 'A no-obligation first meeting to understand your goals, academic background and budget.' },
+  { title: 'Document Checklist & Review', description: 'A destination-specific checklist, plus a review pass on every document before submission.' },
+  { title: 'Course & University Shortlisting', description: 'Options matched to your profile, budget and career goals — not a one-size-fits-all list.' },
+  { title: 'Visa Interview Preparation', description: 'Mock interview sessions so you know what to expect and how to answer with confidence.' },
+  { title: 'Application Tracking', description: 'Regular updates on where your application stands, from submission to decision.' },
+  { title: 'Pre-Departure Briefing', description: 'Practical guidance on travel, accommodation and settling in before you fly.' },
+];
+
+export const officeHours = [
+  { day: 'Monday – Saturday', hours: '9:30 AM – 7:00 PM' },
+  { day: 'Sunday', hours: 'By appointment only' },
+];
+
 export const aboutContent = {
   who: 'Blossom Learning Centre (BLC) is an education and immigration consultancy based in Ladwa, Haryana, supporting students who want to study abroad and build their future overseas.',
   what: 'BLC offers guidance across student visas, immigration consultancy, and English-language preparation through IELTS, PTE and spoken English training, helping students prepare thoroughly for each step of their journey.',
   who2: 'We work with students at every stage — from those just beginning to explore their options, to those preparing final documentation for submission.',
   how: 'Our approach is personal and structured: one-to-one consultations, honest guidance based on your individual circumstances, and consistent support from initial enquiry through to application outcome.',
 };
+
+export interface ModuleStrategy {
+  module: string;
+  icon: string;
+  tips: string[];
+}
+
+export interface ExamStrategyGuide {
+  exam: 'IELTS' | 'PTE';
+  summary: string;
+  modules: ModuleStrategy[];
+}
+
+// General, well-established exam-technique guidance BLC shares in class —
+// not official test material, and not a substitute for a full course.
+export const examStrategies: ExamStrategyGuide[] = [
+  {
+    exam: 'IELTS',
+    summary: 'IELTS tests Listening, Reading, Writing and Speaking, with a face-to-face or video-call Speaking component. These are technique tips, not shortcuts — consistent practice is what actually moves your band score.',
+    modules: [
+      {
+        module: 'Listening',
+        icon: 'headset',
+        tips: [
+          'Read the questions before each section starts — you\'ll know exactly what to listen for.',
+          'Answers usually follow the order of the questions, so keep pace with the audio rather than jumping ahead.',
+          'Watch for synonyms: the audio rarely uses the exact words in the question.',
+          'Write something for every question — there\'s no penalty for a wrong guess, but a blank is guaranteed to lose the mark.',
+          'Check spelling and singular/plural carefully when transferring answers.',
+        ],
+      },
+      {
+        module: 'Reading',
+        icon: 'book',
+        tips: [
+          'Skim the passage first for overall meaning before reading questions in detail.',
+          'Work to a time budget — roughly 20 minutes per passage — and move on if you get stuck.',
+          'Underline keywords in the question, then scan (don\'t re-read line by line) to locate them in the text.',
+          'For True/False/Not Given, base your answer only on what the passage states — not on outside knowledge.',
+        ],
+      },
+      {
+        module: 'Writing',
+        icon: 'compass',
+        tips: [
+          'Task 1 (Academic): open with a one-sentence overview of the main trend before giving supporting data.',
+          'Task 2: make sure your essay directly answers every part of the question — a well-written essay that misses the question scores poorly.',
+          'Plan your paragraph structure for 2–3 minutes before you start writing — it saves time and keeps your argument clear.',
+          'Stay within reach of the word count (150+ for Task 1, 250+ for Task 2) — quality over padding, but don\'t under-write.',
+        ],
+      },
+      {
+        module: 'Speaking',
+        icon: 'chat',
+        tips: [
+          'In Part 2, use your one-minute prep time to jot 3–4 bullet points, not full sentences.',
+          'Extend answers naturally with a reason or example — one-word answers cost you fluency marks.',
+          'Speak at a natural pace; clarity matters far more than speed.',
+          'It\'s fine to briefly pause and self-correct — examiners mark natural communication, not perfection.',
+        ],
+      },
+    ],
+  },
+  {
+    exam: 'PTE',
+    summary: 'PTE Academic is fully computer-based and scores fluency, pronunciation and grammar automatically across all four modules. Microphone technique and timing matter as much as accuracy.',
+    modules: [
+      {
+        module: 'Speaking',
+        icon: 'headset',
+        tips: [
+          'For Read Aloud, use the 30–40 second prep time to mark natural pause points in the text.',
+          'For Repeat Sentence, focus on rhythm and stress over word-perfect recall — the scoring rewards natural intonation.',
+          'For Describe Image, use a simple template (overview → key trend → notable detail → conclusion) so you never run out of things to say.',
+          'Keep talking without long silences — the mic can cut your response short if you pause too long.',
+        ],
+      },
+      {
+        module: 'Writing',
+        icon: 'compass',
+        tips: [
+          'Summarize Written Text must be one single sentence, 5–75 words — practice this constraint specifically.',
+          'For the essay, spend the first 2–3 minutes outlining your position before writing.',
+          'Vary sentence structure and use accurate linking words — grammar and vocabulary range are scored directly.',
+        ],
+      },
+      {
+        module: 'Reading',
+        icon: 'book',
+        tips: [
+          'For Reorder Paragraphs, find the sentence that introduces the topic first — it anchors the rest of the order.',
+          'For Fill in the Blanks, read the whole sentence before choosing a word — context decides the correct collocation.',
+          'Don\'t linger on one item too long; every question carries similar weight, so protect your overall time.',
+        ],
+      },
+      {
+        module: 'Listening',
+        icon: 'headset',
+        tips: [
+          'For Summarize Spoken Text, note key points as you listen rather than trying to recall everything afterwards.',
+          'For Highlight Incorrect Words, follow the transcript with your eyes exactly in time with the audio.',
+          'Practice with test-day headphones/mic conditions so exam-day audio isn\'t your first time hearing that setup.',
+        ],
+      },
+    ],
+  },
+];
+
+export interface PolicySection {
+  heading: string;
+  body: string[];
+}
+
+export const legalUpdatedOn = '31 August 2026';
+
+export const privacyPolicy: PolicySection[] = [
+  {
+    heading: 'Information We Collect',
+    body: [
+      'When you book a consultation, submit an enquiry form, or contact us by phone, email or WhatsApp, we collect information such as your name, phone number, email address, academic background and study or immigration goals.',
+      'We do not collect payment card details on this website — any service fees are discussed and handled directly at our Ladwa office.',
+    ],
+  },
+  {
+    heading: 'How We Use Your Information',
+    body: [
+      'We use the information you provide to respond to your enquiry, schedule consultations, prepare guidance relevant to your goals, and follow up on your application where you have engaged us to help.',
+      'We do not sell or rent your personal information to third parties. Where your documents are shared with a university, institution or visa authority, this is done only with your knowledge as part of your application.',
+    ],
+  },
+  {
+    heading: 'Data Storage & Retention',
+    body: [
+      'Enquiry and consultation records are kept only as long as needed to support your application and for a reasonable period afterwards for our internal records, after which they may be deleted on request.',
+    ],
+  },
+  {
+    heading: 'Your Choices',
+    body: [
+      'You can ask us at any time to tell you what information we hold about you, to correct it, or to delete it, by contacting us using the details on our Contact page. We will action reasonable requests promptly.',
+    ],
+  },
+  {
+    heading: 'Third-Party Links',
+    body: [
+      'Our website links to third-party services such as YouTube (for student testimonial videos) and Instagram/Facebook (for our social updates). These platforms have their own privacy policies, which we encourage you to review.',
+    ],
+  },
+];
+
+export const termsAndConditions: PolicySection[] = [
+  {
+    heading: 'About These Terms',
+    body: [
+      `These terms govern your use of the ${siteInfo.name} (BLC) website and your engagement of our consultancy services. By contacting us or using our services, you agree to these terms.`,
+    ],
+  },
+  {
+    heading: 'Nature of Our Services',
+    body: [
+      'BLC provides guidance, documentation support and preparation for student visas, immigration pathways, and English-language tests (IELTS, PTE, and spoken English training). We are a guidance and preparation service, not a government body.',
+      'All visa, admission, permit and test-related decisions are made solely by the relevant university, institution, immigration authority or examination body. BLC does not guarantee admission, visa approval, immigration outcomes or test scores, and makes no representation that any outcome is assured.',
+    ],
+  },
+  {
+    heading: 'Your Responsibilities',
+    body: [
+      'You agree to provide accurate, complete and truthful information and documents. Any consequence arising from incorrect or incomplete information you provide is your responsibility.',
+      'You remain responsible for meeting the deadlines, fees and requirements set by universities, institutions and immigration or examination authorities.',
+    ],
+  },
+  {
+    heading: 'Fees',
+    body: [
+      'Service fees, where applicable, are agreed in person before work begins and are separate from any fees payable directly to universities, institutions, visa authorities or examination bodies. See our Refund & Cancellation Policy for how fee refunds are handled.',
+    ],
+  },
+  {
+    heading: 'Limitation of Liability',
+    body: [
+      'While we take care to provide accurate, up-to-date guidance, immigration rules, admission criteria and test requirements can change without notice. BLC is not liable for losses arising from changes made by third-party authorities or institutions after guidance was given.',
+    ],
+  },
+  {
+    heading: 'Changes to These Terms',
+    body: [
+      'We may update these terms from time to time to reflect changes to our services. The version on this page is the one currently in effect.',
+    ],
+  },
+];
+
+export const refundPolicy: PolicySection[] = [
+  {
+    heading: 'Consultation Fees',
+    body: [
+      'Your first consultation with BLC is free. No fee is charged, and so no refund applies, for this initial meeting.',
+    ],
+  },
+  {
+    heading: 'Service Fees',
+    body: [
+      'Where a service fee has been agreed for documentation, application or test-preparation support, refund eligibility depends on the stage of work already completed at the time of your cancellation request.',
+      'If you cancel before we have begun preparing your documentation or coursework, the fee paid is refundable in full, less any amount already paid on your behalf to a third party (such as an application or registration fee).',
+      'Once document preparation, application submission, or scheduled coaching sessions have begun, fees already earned for work completed are non-refundable. Any unearned portion for services not yet delivered will be refunded.',
+    ],
+  },
+  {
+    heading: 'Third-Party Fees',
+    body: [
+      'Fees paid directly to universities, institutions, visa authorities or examination bodies (such as application fees, tuition deposits, visa fees or exam registration fees) are governed by that organisation\'s own refund policy and are not refundable by BLC.',
+    ],
+  },
+  {
+    heading: 'How to Request a Refund',
+    body: [
+      'To request a refund, contact us using the details on our Contact page with your name and the date of payment. We will confirm the outcome of your request within a reasonable time.',
+    ],
+  },
+];

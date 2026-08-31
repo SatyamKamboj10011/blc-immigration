@@ -6,7 +6,11 @@ import SectionHeading from '../components/SectionHeading';
 import CTASection from '../components/CTASection';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
+import StudentVisa from './StudentVisa';
+import EnglishProgram from './EnglishProgram';
 import { services } from '../data/site';
+
+const englishProgramSlugs = ['ielts', 'pte', 'spoken-english'];
 
 const heroImages: Record<string, string> = {
   'student-visa': 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80',
@@ -21,6 +25,8 @@ export default function ServiceDetail() {
   const service = services.find((s) => s.slug === slug);
 
   if (!service) return <Navigate to="/services" replace />;
+  if (service.slug === 'student-visa') return <StudentVisa />;
+  if (englishProgramSlugs.includes(service.slug)) return <EnglishProgram slug={service.slug} />;
 
   return (
     <Layout

@@ -19,13 +19,13 @@ export default function SectionHeading({
   return (
     <Reveal className={`flex flex-col gap-3 ${alignClass} max-w-2xl`}>
       {eyebrow && (
-        <span className={`eyebrow flex items-center gap-2 ${light ? 'text-gold-300' : 'text-gold-600'}`}>
-          <span className={`h-px w-6 ${light ? 'bg-gold-300' : 'bg-gold-600'}`} aria-hidden="true" />
+        <span className={`eyebrow flex items-center gap-2 ${light ? 'text-gold-400' : 'text-gold-600'}`}>
+          <span className={`h-px w-6 ${light ? 'bg-gold-400' : 'bg-gold-600'}`} aria-hidden="true" />
           {eyebrow}
         </span>
       )}
       <h2
-        className={`font-display text-3xl sm:text-4xl font-semibold leading-[1.1] tracking-tight ${
+        className={`font-display text-3xl sm:text-4xl font-black uppercase leading-[1.1] tracking-tight ${
           light ? 'text-white' : 'text-brand-950'
         }`}
       >

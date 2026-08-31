@@ -50,7 +50,7 @@ export default function ContactForm() {
 
     setStatus('submitting');
     try {
-      const result = await submitEnquiry(form);
+      const result = await submitEnquiry({ source: 'Contact Form', ...form });
       if (!result.ok) throw new Error('Submission failed');
       setStatus('success');
       setForm(initialState);
@@ -65,7 +65,7 @@ export default function ContactForm() {
   }
 
   const inputClasses =
-    'focus-ring w-full rounded-md border border-brand-200 bg-white px-4 py-3 text-sm text-brand-950 placeholder:text-brand-800/40';
+    'focus-ring w-full rounded-xl border border-brand-900/15 bg-paper-dim px-4 py-3 text-sm text-brand-950 placeholder:text-brand-800/40';
 
   if (status === 'success') {
     return (
@@ -95,6 +95,7 @@ export default function ContactForm() {
           name="name"
           type="text"
           autoComplete="name"
+          placeholder="Enter your full name"
           className={inputClasses}
           value={form.name}
           onChange={(e) => handleChange('name', e.target.value)}
@@ -114,6 +115,7 @@ export default function ContactForm() {
             name="email"
             type="email"
             autoComplete="email"
+            placeholder="Enter your email address"
             className={inputClasses}
             value={form.email}
             onChange={(e) => handleChange('email', e.target.value)}
@@ -131,6 +133,7 @@ export default function ContactForm() {
             name="phone"
             type="tel"
             autoComplete="tel"
+            placeholder="Enter your phone number"
             className={inputClasses}
             value={form.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
@@ -174,6 +177,7 @@ export default function ContactForm() {
           id="message"
           name="message"
           rows={4}
+          placeholder="Tell us about your goals"
           className={inputClasses}
           value={form.message}
           onChange={(e) => handleChange('message', e.target.value)}
@@ -183,8 +187,8 @@ export default function ContactForm() {
         {errors.message && <p id="message-error" className="mt-1 text-xs font-medium text-red-600">{errors.message}</p>}
       </div>
 
-      <Button type="submit" size="lg" className="w-full sm:w-fit">
-        {status === 'submitting' ? 'Sending…' : 'Send Enquiry'}
+      <Button type="submit" size="lg" variant="accent" className="w-full">
+        {status === 'submitting' ? 'Sending…' : 'Send Message'}
       </Button>
     </form>
   );

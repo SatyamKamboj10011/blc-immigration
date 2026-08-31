@@ -5,7 +5,8 @@ import SectionHeading from '../components/SectionHeading';
 import FeatureCard from '../components/FeatureCard';
 import CTASection from '../components/CTASection';
 import Button from '../components/Button';
-import { whyChooseBLC, aboutContent, siteInfo } from '../data/site';
+import Icon from '../components/Icon';
+import { whyChooseBLC, aboutContent, siteInfo, leadership } from '../data/site';
 
 export default function About() {
   return (
@@ -50,6 +51,33 @@ export default function About() {
       </section>
 
       <section className="py-20 sm:py-28">
+        <div className="container-page flex flex-col gap-12">
+          <SectionHeading eyebrow="Leadership" heading="Meet the Directors" align="center" />
+          <div className="mx-auto grid w-full max-w-2xl gap-6 sm:grid-cols-2">
+            {leadership.map((person) => (
+              <div key={person.name} className="flex flex-col items-center gap-3 rounded-xl2 border border-brand-900/10 bg-white p-6 text-center shadow-card">
+                {person.photo ? (
+                  <img src={person.photo} alt={person.name} className="h-20 w-20 rounded-full object-cover" />
+                ) : (
+                  <span className="flex h-20 w-20 items-center justify-center rounded-full bg-brand-950 font-display text-2xl font-black text-gold-500">
+                    {person.name.split(' ').map((n) => n[0]).join('')}
+                  </span>
+                )}
+                <div>
+                  <h3 className="font-display text-lg font-extrabold uppercase tracking-tight text-brand-950">{person.name}</h3>
+                  <p className="eyebrow text-gold-700">{person.title}</p>
+                </div>
+                <a href={person.phoneHref} className="focus-ring flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-900">
+                  <Icon name="phone" className="h-4 w-4" />
+                  {person.phone}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-paper-dim py-20 sm:py-28">
         <div className="container-page grid gap-12 lg:grid-cols-2 lg:items-center">
           <img
             src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1200&q=80"

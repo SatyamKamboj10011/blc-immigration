@@ -17,7 +17,7 @@ export default function Services() {
         eyebrow="Our Services"
         headline="Support Across Every Step of Your Journey"
         supportingText="From visa documentation to English-language preparation, BLC offers structured, honest guidance tailored to your goals."
-        image="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80"
+        image="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1600&q=80"
         imageAlt="Student preparing application documents"
         compact
       />

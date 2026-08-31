@@ -16,7 +16,7 @@ body {
 }
 
 .eyebrow {
-  @apply font-mono text-[0.7rem] font-medium uppercase tracking-[0.2em];
+  @apply font-sans text-[0.75rem] font-bold uppercase tracking-[0.14em];
 }
 
 .reveal {

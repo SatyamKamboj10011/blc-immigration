@@ -6,7 +6,11 @@ import ServiceDetail from './pages/ServiceDetail';
 import StudyAbroad from './pages/StudyAbroad';
 import DestinationDetail from './pages/DestinationDetail';
 import SuccessStories from './pages/SuccessStories';
+import ExamStrategies from './pages/ExamStrategies';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
+import RefundPolicy from './pages/RefundPolicy';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -19,7 +23,11 @@ export default function App() {
       <Route path="/study-abroad" element={<StudyAbroad />} />
       <Route path="/study-abroad/:slug" element={<DestinationDetail />} />
       <Route path="/success-stories" element={<SuccessStories />} />
+      <Route path="/exam-strategies" element={<ExamStrategies />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms-conditions" element={<TermsConditions />} />
+      <Route path="/refund-policy" element={<RefundPolicy />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

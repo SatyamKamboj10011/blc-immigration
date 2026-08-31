@@ -1,4 +1,7 @@
+export type EnquirySource = 'Contact Form' | 'Call Back Request' | 'Newsletter Subscription';
+
 export interface EnquiryPayload {
+  source: EnquirySource;
   name: string;
   email: string;
   phone: string;
@@ -30,6 +33,7 @@ export async function submitEnquiry(payload: EnquiryPayload): Promise<{ ok: bool
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({
         timestamp: new Date().toISOString(),
+        source: payload.source,
         name: payload.name,
         email: payload.email,
         phone: payload.phone,

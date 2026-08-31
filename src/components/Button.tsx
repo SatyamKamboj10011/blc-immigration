@@ -15,15 +15,15 @@ interface ButtonProps {
 }
 
 const variants = {
-  primary: 'bg-brand-800 text-paper hover:bg-brand-900',
-  secondary: 'bg-transparent text-brand-800 border border-brand-800/70 hover:bg-brand-800 hover:text-paper',
-  ghost: 'bg-transparent text-white border border-white/40 hover:bg-white/10',
-  accent: 'bg-gold-500 text-brand-950 hover:bg-gold-400',
+  primary: 'bg-brand-900 text-white hover:bg-brand-800',
+  secondary: 'bg-transparent text-brand-900 border-2 border-brand-900 hover:bg-brand-900 hover:text-white',
+  ghost: 'bg-transparent text-white border-2 border-white/50 hover:bg-white/10',
+  accent: 'bg-gold-500 text-brand-950 shadow-[0_10px_24px_rgba(0,35,19,0.25)] hover:bg-gold-600',
 };
 
 const sizes = {
-  md: 'px-5 py-2.5 text-sm',
-  lg: 'px-7 py-3.5 text-base',
+  md: 'px-6 py-2.5 text-sm',
+  lg: 'px-8 py-3.5 text-base',
 };
 
 export default function Button({
@@ -37,12 +37,16 @@ export default function Button({
   className = '',
   showArrow = false,
 }: ButtonProps) {
-  const classes = `focus-ring inline-flex items-center justify-center gap-2 rounded-sm font-semibold tracking-tight transition-colors duration-200 active:scale-[0.98] ${variants[variant]} ${sizes[size]} ${className}`;
+  const classes = `focus-ring inline-flex items-center justify-center gap-2 rounded-full font-bold uppercase tracking-wide transition-all duration-200 active:scale-[0.98] ${variants[variant]} ${sizes[size]} ${className}`;
 
   const content = (
     <>
       {children}
-      {showArrow && <Icon name="arrow" className="h-4 w-4" />}
+      {showArrow && (
+        <span className={`inline-flex h-6 w-6 items-center justify-center rounded-full ${variant === 'accent' ? 'bg-brand-950/15' : 'bg-white/20'}`}>
+          <Icon name="arrow" className="h-3.5 w-3.5" />
+        </span>
+      )}
     </>
   );
 
