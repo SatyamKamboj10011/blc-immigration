@@ -24,10 +24,29 @@ into a Google Sheet, and the whole site deploys as static assets.
 - An IELTS/PTE exam-strategy resource page with real, module-by-module technique guidance
 - Contact form, "Request a Call Back" popup, and newsletter signup — all three feed one
   Google Sheet with a `Source` column so submissions are easy to tell apart
-- A floating WhatsApp button and a rule-based "Quick Help" widget that answers common
-  questions from the site's own data (not an AI chatbot — see `src/components/ChatWidget.tsx`)
+- A floating WhatsApp button and a "Quick Help" widget where students can type questions in
+  their own words. A ~23 MB semantic-search model (all-MiniLM-L6-v2 via transformers.js) runs
+  entirely in the visitor's browser — free, no server or API key — and matches the question to
+  BLC's own written answers in `src/lib/knowledge.ts`. It never generates text, so it can't invent
+  fees or visa rules; unmatched questions are handed to WhatsApp. Add new Q&As to `knowledge.ts`.
+- English, Hindi (हिन्दी) and Punjabi (ਪੰਜਾਬੀ) — switcher in the navbar, remembered per visitor
+- Looping background videos for each country and key sections (`public/videos`, from the free
+  Mixkit Stock Video License). They load only when on screen and fall back to a photo for
+  data-saver or reduced-motion visitors
 - Privacy Policy, Terms & Conditions, and Refund Policy pages
 - A "Meet the Directors" leadership section on the About page
+
+## Translations & the Quick Help AI
+
+- Text is wrapped in `t('English text')`; the English string is the key in `src/i18n/hi.json` and
+  `src/i18n/pa.json`. Anything untranslated falls back to English. Legal policies and the exam
+  technique guides intentionally stay in English.
+- `npm run i18n:check` lists strings missing a Hindi/Punjabi translation (add `-- --write` to save
+  them to `scripts/i18n-missing.json`). `node scripts/i18n-build.mjs` merges numbered translations
+  from `scripts/translations/*.tsv` into the dictionaries.
+- `npm run ai:eval` measures the assistant against ~100 test questions (English, Hinglish, Hindi,
+  Punjabi, off-topic); `npm run ai:eval -- --holdout` runs 30 questions never used for tuning.
+  Add Q&As and phrasings in `src/lib/knowledge.ts`, then re-run both.
 
 ## Development
 

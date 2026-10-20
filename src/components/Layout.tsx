@@ -5,15 +5,19 @@ import Footer from './Footer';
 import WhatsAppButton from './WhatsAppButton';
 import CallbackPanel from './CallbackPanel';
 import ChatWidget from './ChatWidget';
+import PageTransition from './PageTransition';
+import { scrollToTop } from './SmoothScroll';
 import { trackPageview } from '../lib/analytics';
 
 interface LayoutProps {
   children: ReactNode;
   title: string;
   description: string;
+  // let the first section run underneath the floating navbar (dark full-bleed heroes)
+  underNav?: boolean;
 }
 
-export default function Layout({ children, title, description }: LayoutProps) {
+export default function Layout({ children, title, description, underNav = false }: LayoutProps) {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -26,14 +30,15 @@ export default function Layout({ children, title, description }: LayoutProps) {
     setOg('og:url', `https://blcimmigration.com${pathname}`);
     setMeta('twitter:title', title);
     setMeta('twitter:description', description);
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    scrollToTop();
     trackPageview(pathname);
   }, [title, description, pathname]);
 
   return (
     <div className="flex min-h-screen flex-col">
+      <PageTransition />
       <Navbar />
-      <main id="main" className="flex-1">
+      <main id="main" className={`flex-1 ${underNav ? '' : 'pt-24 sm:pt-28'}`}>
         {children}
       </main>
       <Footer />

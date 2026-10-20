@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from './Button';
 import Icon from './Icon';
 import { destinations } from '../data/site';
+import { useT, type TFunction } from '../i18n';
 
 const educationOptions = ['Class 12 / Higher Secondary', "Bachelor's Degree", "Master's Degree", 'Diploma / Vocational'];
 const englishOptions = ['Not started yet', 'Currently preparing', 'Already have a valid score'];
@@ -11,37 +12,44 @@ interface Result {
   points: string[];
 }
 
-function buildResult(education: string, destination: string, english: string): Result {
+function buildResult(t: TFunction, education: string, destination: string, english: string): Result {
   const dest = destinations.find((d) => d.name === destination);
   const points: string[] = [];
 
   if (english === 'Not started yet') {
-    points.push('Start with an English test decision — BLC can help you choose between IELTS and PTE based on your target institutions.');
+    points.push(t('Start with an English test decision — BLC can help you choose between IELTS and PTE based on your target institutions.'));
   } else if (english === 'Currently preparing') {
-    points.push('Keep up structured practice — book a mock test with BLC to check your readiness before the real exam.');
+    points.push(t('Keep up structured practice — book a mock test with BLC to check your readiness before the real exam.'));
   } else {
-    points.push('With a valid score in hand, the next step is usually shortlisting institutions and preparing documentation.');
+    points.push(t('With a valid score in hand, the next step is usually shortlisting institutions and preparing documentation.'));
   }
 
   if (dest) {
-    points.push(`For ${dest.name}, BLC can walk you through: ${dest.studyOptions[0].toLowerCase()} and ${dest.studyOptions[1].toLowerCase()}.`);
+    points.push(
+      t('For {country}, BLC can walk you through: {first} and {second}.', {
+        country: t(dest.name),
+        first: t(dest.studyOptions[0]).toLowerCase(),
+        second: t(dest.studyOptions[1]).toLowerCase(),
+      }),
+    );
   }
 
   if (education === 'Class 12 / Higher Secondary') {
-    points.push('Undergraduate pathway and foundation programmes are usually the starting point at your stage.');
+    points.push(t('Undergraduate pathway and foundation programmes are usually the starting point at your stage.'));
   } else {
-    points.push('Postgraduate programmes matching your existing qualification are usually the starting point at your stage.');
+    points.push(t('Postgraduate programmes matching your existing qualification are usually the starting point at your stage.'));
   }
 
-  points.push('This is general guidance only — a one-to-one consultation will confirm what applies to your specific situation.');
+  points.push(t('This is general guidance only — a one-to-one consultation will confirm what applies to your specific situation.'));
 
   return {
-    headline: `Here's where to start${dest ? ` — ${dest.name}` : ''}`,
+    headline: dest ? t("Here's where to start — {country}", { country: t(dest.name) }) : t("Here's where to start"),
     points,
   };
 }
 
 export default function EligibilityCheck() {
+  const t = useT();
   const [education, setEducation] = useState('');
   const [destination, setDestination] = useState('');
   const [english, setEnglish] = useState('');
@@ -54,7 +62,7 @@ export default function EligibilityCheck() {
       {!result ? (
         <div className="flex flex-col gap-6">
           <fieldset>
-            <legend className="mb-2 text-sm font-semibold text-brand-900">Your current education level</legend>
+            <legend className="mb-2 text-sm font-semibold text-brand-900">{t("Your current education level")}</legend>
             <div className="flex flex-wrap gap-2">
               {educationOptions.map((opt) => (
                 <button
@@ -66,14 +74,14 @@ export default function EligibilityCheck() {
                   }`}
                   aria-pressed={education === opt}
                 >
-                  {opt}
+                  {t(opt)}
                 </button>
               ))}
             </div>
           </fieldset>
 
           <fieldset>
-            <legend className="mb-2 text-sm font-semibold text-brand-900">Destination you're considering</legend>
+            <legend className="mb-2 text-sm font-semibold text-brand-900">{t("Destination you're considering")}</legend>
             <div className="flex flex-wrap gap-2">
               {destinations.map((d) => (
                 <button
@@ -85,14 +93,14 @@ export default function EligibilityCheck() {
                   }`}
                   aria-pressed={destination === d.name}
                 >
-                  {d.name}
+                  {t(d.name)}
                 </button>
               ))}
             </div>
           </fieldset>
 
           <fieldset>
-            <legend className="mb-2 text-sm font-semibold text-brand-900">English test status</legend>
+            <legend className="mb-2 text-sm font-semibold text-brand-900">{t("English test status")}</legend>
             <div className="flex flex-wrap gap-2">
               {englishOptions.map((opt) => (
                 <button
@@ -104,7 +112,7 @@ export default function EligibilityCheck() {
                   }`}
                   aria-pressed={english === opt}
                 >
-                  {opt}
+                  {t(opt)}
                 </button>
               ))}
             </div>
@@ -113,10 +121,10 @@ export default function EligibilityCheck() {
           <Button
             type="button"
             size="lg"
-            onClick={() => canCheck && setResult(buildResult(education, destination, english))}
+            onClick={() => canCheck && setResult(buildResult(t, education, destination, english))}
             className={`w-fit ${!canCheck ? 'pointer-events-none opacity-40' : ''}`}
           >
-            See My Starting Point
+            {t("See My Starting Point")}
           </Button>
         </div>
       ) : (
@@ -136,8 +144,8 @@ export default function EligibilityCheck() {
             ))}
           </ul>
           <div className="flex flex-wrap gap-3 pt-2">
-            <Button to="/contact" variant="accent">Book a Consultation</Button>
-            <Button variant="secondary" onClick={() => setResult(null)}>Start Over</Button>
+            <Button to="/contact" variant="accent">{t("Book a Consultation")}</Button>
+            <Button variant="secondary" onClick={() => setResult(null)}>{t("Start Over")}</Button>
           </div>
         </div>
       )}

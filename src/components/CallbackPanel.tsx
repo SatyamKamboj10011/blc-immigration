@@ -2,8 +2,10 @@ import { FormEvent, useState } from 'react';
 import Icon from './Icon';
 import Button from './Button';
 import { submitEnquiry } from '../lib/submitEnquiry';
+import { useT } from '../i18n';
 
 export default function CallbackPanel() {
+  const t = useT();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -13,7 +15,7 @@ export default function CallbackPanel() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!name.trim() || !/^[0-9+()\-\s]{7,15}$/.test(phone)) {
-      setError('Please enter your name and a valid phone number.');
+      setError(t('Please enter your name and a valid phone number.'));
       return;
     }
     setError('');
@@ -37,14 +39,14 @@ export default function CallbackPanel() {
         className="focus-ring fixed bottom-24 right-5 z-40 hidden items-center gap-2 rounded-sm bg-brand-800 px-4 py-3 text-sm font-semibold text-paper shadow-lg transition-colors hover:bg-brand-900 sm:flex"
       >
         <Icon name="phone" className="h-4 w-4" />
-        Request a Call Back
+        {t("Request a Call Back")}
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center" role="dialog" aria-modal="true" aria-label="Request a call back">
+        <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center" role="dialog" aria-modal="true" aria-label={t("Request a call back")}>
           <button
             type="button"
-            aria-label="Close"
+            aria-label={t("Close")}
             className="absolute inset-0 bg-black/50"
             onClick={() => setOpen(false)}
           />
@@ -52,7 +54,7 @@ export default function CallbackPanel() {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              aria-label="Close"
+              aria-label={t("Close")}
               className="focus-ring absolute right-4 top-4 text-brand-800/60 hover:text-brand-800"
             >
               <Icon name="close" className="h-5 w-5" />
@@ -63,7 +65,7 @@ export default function CallbackPanel() {
                 <span className="flex h-11 w-11 items-center justify-center rounded-sm bg-brand-800 text-white">
                   <Icon name="check" className="h-5 w-5" />
                 </span>
-                <h3 className="font-display text-lg font-semibold text-brand-950">We'll call you back shortly.</h3>
+                <h3 className="font-display text-lg font-semibold text-brand-950">{t("We'll call you back shortly.")}</h3>
                 <Button
                   variant="secondary"
                   onClick={() => {
@@ -73,16 +75,16 @@ export default function CallbackPanel() {
                     setPhone('');
                   }}
                 >
-                  Close
+                  {t("Close")}
                 </Button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
-                <h3 className="font-display text-lg font-semibold text-brand-950">Request a Call Back</h3>
-                <p className="text-sm text-brand-800/70">Leave your name and number — the BLC team will call you back.</p>
+                <h3 className="font-display text-lg font-semibold text-brand-950">{t("Request a Call Back")}</h3>
+                <p className="text-sm text-brand-800/70">{t("Leave your name and number — the BLC team will call you back.")}</p>
                 {error && <p className="text-xs font-medium text-red-600">{error}</p>}
                 <div>
-                  <label htmlFor="cb-name" className="mb-1.5 block text-sm font-semibold text-brand-900">Full Name</label>
+                  <label htmlFor="cb-name" className="mb-1.5 block text-sm font-semibold text-brand-900">{t("Full Name")}</label>
                   <input
                     id="cb-name"
                     value={name}
@@ -91,7 +93,7 @@ export default function CallbackPanel() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="cb-phone" className="mb-1.5 block text-sm font-semibold text-brand-900">Phone</label>
+                  <label htmlFor="cb-phone" className="mb-1.5 block text-sm font-semibold text-brand-900">{t("Phone")}</label>
                   <input
                     id="cb-phone"
                     type="tel"
@@ -101,7 +103,7 @@ export default function CallbackPanel() {
                   />
                 </div>
                 <Button type="submit" className="w-full">
-                  {status === 'submitting' ? 'Sending…' : 'Request Call Back'}
+                  {status === 'submitting' ? t('Sending…') : t('Request Call Back')}
                 </Button>
               </form>
             )}

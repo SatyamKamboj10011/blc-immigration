@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Icon from './Icon';
+import { useT } from '../i18n';
 
 interface ServiceCardProps {
   title: string;
@@ -9,6 +10,7 @@ interface ServiceCardProps {
 }
 
 export default function ServiceCard({ title, description, to, icon = 'compass' }: ServiceCardProps) {
+  const t = useT();
   return (
     <Link
       to={to}
@@ -18,11 +20,11 @@ export default function ServiceCard({ title, description, to, icon = 'compass' }
         <Icon name={icon} className="h-5 w-5" />
       </span>
       <div className="flex flex-1 flex-col gap-2">
-        <h3 className="font-display text-lg font-extrabold uppercase tracking-tight text-brand-950">{title}</h3>
+        <h3 className="font-display text-lg font-semibold tracking-[-0.03em] text-brand-950">{title}</h3>
         <p className="flex-1 text-sm leading-relaxed text-brand-500">{description}</p>
       </div>
       <span className="link-underline mt-1 inline-flex w-fit items-center gap-1.5 text-sm font-bold uppercase tracking-wide text-gold-700">
-        Learn More
+        {t("Learn More")}
         <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </span>
     </Link>

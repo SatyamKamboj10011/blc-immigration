@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { navLinks, siteInfo } from '../data/site';
 import Button from './Button';
 import Icon from './Icon';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useT } from '../i18n';
 
 interface MobileMenuProps {
   open: boolean;
@@ -10,6 +12,7 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ open, onClose }: MobileMenuProps) {
+  const t = useT();
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,18 +33,18 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
         }`}
       >
         <div className="flex h-16 items-center justify-between border-b border-brand-900/10 px-5">
-          <img src="/logo.png" alt="Blossom Learning Centre logo" className="h-9 w-auto" />
+          <img src="/logo.png" alt={t("Blossom Learning Centre logo")} className="h-9 w-auto" />
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close menu"
+            aria-label={t("Close menu")}
             className="focus-ring flex h-10 w-10 items-center justify-center rounded-sm text-brand-800 hover:bg-brand-50"
           >
             <Icon name="close" className="h-6 w-6" />
           </button>
         </div>
 
-        <nav className="flex flex-1 flex-col gap-1 px-5 py-6" aria-label="Mobile">
+        <nav className="flex flex-1 flex-col gap-1 px-5 py-6" aria-label={t("Mobile")}>
           {navLinks.map((link) => (
             <NavLink
               key={link.to}
@@ -54,14 +57,15 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                 }`
               }
             >
-              {link.label}
+              {t(link.label)}
             </NavLink>
           ))}
         </nav>
 
         <div className="flex flex-col gap-3 border-t border-brand-900/10 px-5 py-6">
+          <LanguageSwitcher variant="full" />
           <Button to="/contact" onClick={onClose} className="w-full" size="lg" variant="accent">
-            Book a Consultation
+            {t("Book a Consultation")}
           </Button>
           <a
             href={siteInfo.phoneHref}

@@ -6,22 +6,24 @@ import SectionHeading from '../components/SectionHeading';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
 import { examStrategies, legalUpdatedOn } from '../data/site';
+import { useT } from '../i18n';
 
 export default function ExamStrategies() {
+  const t = useT();
   const [active, setActive] = useState<'IELTS' | 'PTE'>('IELTS');
   const guide = examStrategies.find((g) => g.exam === active)!;
 
   return (
     <Layout
-      title="IELTS & PTE Exam Strategies | Blossom Learning Centre"
-      description="Practical, module-by-module IELTS and PTE exam strategies from Blossom Learning Centre — updated guidance to help you prepare with confidence."
+      title={t("IELTS & PTE Exam Strategies | Blossom Learning Centre")}
+      description={t("Practical, module-by-module IELTS and PTE exam strategies from Blossom Learning Centre — updated guidance to help you prepare with confidence.")}
     >
       <Hero
-        eyebrow="Study Resources"
-        headline="IELTS & PTE Exam Strategy Guide"
-        supportingText="Practical, module-by-module techniques our students use to prepare — updated as we refine our teaching approach. This complements structured practice; it isn't a substitute for it."
+        eyebrow={t("Study Resources")}
+        headline={t("IELTS & PTE Exam Strategy Guide")}
+        supportingText={t("Practical, module-by-module techniques our students use to prepare — updated as we refine our teaching approach. This complements structured practice; it isn't a substitute for it.")}
         image="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80"
-        imageAlt="Student studying with notes and a laptop"
+        imageAlt={t("Student studying with notes and a laptop")}
         compact
       />
       <Breadcrumbs items={[{ label: 'Exam Strategies' }]} />
@@ -29,8 +31,8 @@ export default function ExamStrategies() {
       <section className="py-16 sm:py-20">
         <div className="container-page flex flex-col gap-10">
           <div className="flex flex-col gap-2">
-            <p className="eyebrow text-gold-700">Last updated: {legalUpdatedOn}</p>
-            <SectionHeading heading="Choose an Exam" />
+            <p className="eyebrow text-gold-700">{t('Last updated: {date}', { date: legalUpdatedOn })}</p>
+            <SectionHeading heading={t("Choose an Exam")} />
           </div>
 
           <div className="flex gap-3">
@@ -50,7 +52,7 @@ export default function ExamStrategies() {
             ))}
           </div>
 
-          <p className="max-w-2xl text-base leading-relaxed text-brand-500">{guide.summary}</p>
+          <p className="max-w-2xl text-base leading-relaxed text-brand-500">{t(guide.summary)}</p>
 
           <div className="grid gap-6 sm:grid-cols-2">
             {guide.modules.map((m) => (
@@ -59,7 +61,7 @@ export default function ExamStrategies() {
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gold-500 text-brand-950">
                     <Icon name={m.icon} className="h-5 w-5" />
                   </span>
-                  <h3 className="font-display text-lg font-extrabold uppercase tracking-tight text-brand-950">{m.module}</h3>
+                  <h3 className="font-display text-lg font-semibold tracking-[-0.03em] text-brand-950">{m.module}</h3>
                 </div>
                 <ul className="flex flex-col gap-2.5">
                   {m.tips.map((tip) => (
@@ -80,12 +82,12 @@ export default function ExamStrategies() {
           <SectionHeading
             light
             align="center"
-            eyebrow="Want the Full Picture?"
-            heading="These Tips Work Best With Structured Practice"
-            description="Book a free assessment and we'll build a realistic study plan around your target score and timeline."
+            eyebrow={t("Want the Full Picture?")}
+            heading={t("These Tips Work Best With Structured Practice")}
+            description={t("Book a free assessment and we'll build a realistic study plan around your target score and timeline.")}
           />
           <div className="flex flex-wrap justify-center gap-4">
-            <Button to="/contact" variant="accent">Book a Free Assessment</Button>
+            <Button to="/contact" variant="accent">{t("Book a Free Assessment")}</Button>
             <Button to={active === 'PTE' ? '/services/pte' : '/services/ielts'} variant="ghost">
               {active === 'PTE' ? 'Explore PTE Program' : 'Explore IELTS Program'}
             </Button>

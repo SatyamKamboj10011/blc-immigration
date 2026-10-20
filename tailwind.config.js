@@ -31,8 +31,11 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['"Archivo"', 'system-ui', 'sans-serif'],
+        // Noto fallbacks supply the Hindi (Devanagari) and Punjabi (Gurmukhi) glyphs Poppins lacks;
+        // browsers only download them when those scripts actually appear on the page
+        sans: ['Poppins', '"Noto Sans Devanagari"', '"Noto Sans Gurmukhi"', 'system-ui', 'sans-serif'],
+        display: ['Poppins', '"Noto Sans Devanagari"', '"Noto Sans Gurmukhi"', 'system-ui', 'sans-serif'],
+        serif: ['"Cormorant Garamond"', '"Noto Serif Devanagari"', '"Noto Serif Gurmukhi"', 'Georgia', 'serif'],
         mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
@@ -40,7 +43,21 @@ export default {
         'card-hover': '0 14px 28px rgba(10, 10, 10, 0.14)',
       },
       borderRadius: {
-        xl2: '1.25rem',
+        xl2: '1.5rem',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-12px)' },
+        },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        float: 'float 5s ease-in-out infinite',
+        marquee: 'marquee 40s linear infinite',
       },
     },
   },

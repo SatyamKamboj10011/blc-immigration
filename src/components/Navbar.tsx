@@ -1,90 +1,109 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { navLinks, siteInfo } from '../data/site';
+import { motion, useMotionValueEvent, useScroll, useSpring } from 'motion/react';
+import { navLinks } from '../data/site';
 import Button from './Button';
 import Icon from './Icon';
 import MobileMenu from './MobileMenu';
+import LanguageSwitcher from './LanguageSwitcher';
+import { setScrollLocked } from './SmoothScroll';
+import { useT } from '../i18n';
 
+// Floating frosted "pill" navbar with a scroll-progress line along its bottom edge.
 export default function Navbar() {
+  const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { scrollY, scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 24));
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    setScrollLocked(mobileOpen);
     return () => {
       document.body.style.overflow = '';
+      setScrollLocked(false);
     };
   }, [mobileOpen]);
 
   return (
     <>
-    <div className="hidden bg-brand-950 text-white/80 sm:block">
-      <div className="container-page flex items-center justify-between py-2 text-xs">
-        <a href={siteInfo.phoneHref} className="focus-ring flex items-center gap-2 rounded hover:text-white">
-          <Icon name="phone" className="h-3.5 w-3.5 text-gold-500" />
-          {siteInfo.phone}
-        </a>
-        <a href={siteInfo.emailHref} className="focus-ring flex items-center gap-2 rounded hover:text-white">
-          <Icon name="mail" className="h-3.5 w-3.5 text-gold-500" />
-          {siteInfo.email}
-        </a>
-      </div>
-    </div>
-    <header
-      className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
-        scrolled ? 'border-brand-900/10 bg-white/95 backdrop-blur shadow-card' : 'border-transparent bg-white'
-      }`}
-    >
-      <nav className="container-page flex h-20 items-center justify-between" aria-label="Primary">
-        <Link to="/" className="focus-ring flex items-center gap-2 rounded-md">
-          <img src="/logo.png" alt="Blossom Learning Centre logo" className="h-11 w-auto" />
-        </Link>
-
-        <ul className="hidden items-center gap-1 lg:flex">
-          {navLinks.map((link) => (
-            <li key={link.to}>
-              <NavLink
-                to={link.to}
-                end={link.to === '/'}
-                className={({ isActive }) =>
-                  `focus-ring rounded-full px-4 py-2 text-sm font-bold uppercase tracking-wide transition-colors ${
-                    isActive
-                      ? 'text-brand-700'
-                      : 'text-brand-900/80 hover:text-brand-700'
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-
-        <div className="hidden items-center gap-5 lg:flex">
-          <Button to="/contact" size="md" variant="accent">
-            Book Free Consultation
-          </Button>
-        </div>
-
-        <button
-          type="button"
-          className="focus-ring inline-flex items-center justify-center rounded-full p-2 text-brand-900 lg:hidden"
-          aria-label="Open menu"
-          aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen(true)}
+      <motion.header
+        className="fixed inset-x-0 top-3 z-50 px-3 sm:top-4 sm:px-5"
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.6 }}
+      >
+        <nav
+          aria-label={t("Primary")}
+          className={`relative mx-auto flex h-16 max-w-7xl items-center justify-between overflow-hidden rounded-2xl border pl-4 pr-2.5 backdrop-blur-xl transition-[background-color,box-shadow,border-color] duration-500 sm:h-[4.5rem] sm:pl-5 ${
+            scrolled
+              ? 'border-white/60 bg-white/85 shadow-[0_18px_50px_rgba(0,23,16,0.14)]'
+              : 'border-white/40 bg-white/75 shadow-[0_10px_30px_rgba(0,23,16,0.08)]'
+          }`}
         >
-          <Icon name="menu" className="h-7 w-7" />
-        </button>
-      </nav>
-    </header>
-    <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+          <Link to="/" className="focus-ring flex shrink-0 items-center rounded-md">
+            <img src="/logo.png" alt={t("Blossom Learning Centre logo")} className="h-10 w-auto sm:h-11" />
+          </Link>
+
+          <ul className="hidden items-center lg:flex">
+            {navLinks.map((link) => (
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
+                  end={link.to === '/'}
+                  className={({ isActive }) =>
+                    `focus-ring group relative whitespace-nowrap rounded-full px-2.5 py-2 text-[13px] font-medium transition-colors xl:px-3.5 ${
+                      isActive ? 'text-brand-950' : 'text-brand-900/65 hover:text-brand-950'
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {t(link.label)}
+                      <span
+                        aria-hidden="true"
+                        className={`absolute inset-x-2.5 bottom-0.5 h-px origin-left bg-brand-950 transition-transform duration-300 xl:inset-x-3.5 ${
+                          isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                        }`}
+                      />
+                    </>
+                  )}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+
+          <div className="hidden items-center gap-2 lg:flex">
+            <LanguageSwitcher />
+            <Button to="/contact" size="md" variant="primary" className="whitespace-nowrap" showArrow>
+              {t("Free Consultation")}
+            </Button>
+          </div>
+
+          <div className="ml-auto mr-2 lg:hidden">
+            <LanguageSwitcher />
+          </div>
+          <button
+            type="button"
+            className="focus-ring inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-950 text-white lg:hidden"
+            aria-label={t("Open menu")}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen(true)}
+          >
+            <Icon name="menu" className="h-5 w-5" />
+          </button>
+
+          <motion.span
+            aria-hidden="true"
+            className="absolute bottom-0 left-0 h-[2px] w-full origin-left bg-gradient-to-r from-brand-700 via-brand-400 to-gold-500"
+            style={{ scaleX: progress }}
+          />
+        </nav>
+      </motion.header>
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
     </>
   );
 }

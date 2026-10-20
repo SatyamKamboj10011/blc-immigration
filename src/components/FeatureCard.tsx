@@ -12,7 +12,7 @@ export default function FeatureCard({ icon, title, description }: FeatureCardPro
       <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500 text-brand-950">
         <Icon name={icon} className="h-5 w-5" />
       </span>
-      <h3 className="font-display text-lg font-extrabold uppercase tracking-tight text-brand-950">{title}</h3>
+      <h3 className="font-display text-lg font-semibold tracking-[-0.03em] text-brand-950">{title}</h3>
       <p className="text-sm leading-relaxed text-brand-800/75">{description}</p>
     </div>
   );

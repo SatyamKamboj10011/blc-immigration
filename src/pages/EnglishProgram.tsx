@@ -6,6 +6,7 @@ import Button from '../components/Button';
 import Icon from '../components/Icon';
 import SuccessStoryCard from '../components/SuccessStoryCard';
 import { services, testimonials, ServiceSlug } from '../data/site';
+import { useT } from '../i18n';
 
 const heroImages: Record<string, string> = {
   ielts: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80',
@@ -16,31 +17,32 @@ const heroImages: Record<string, string> = {
 const englishSlugs: ServiceSlug[] = ['ielts', 'pte', 'spoken-english'];
 
 export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
+  const t = useT();
   const service = services.find((s) => s.slug === slug)!;
   const englishServices = services.filter((s) => englishSlugs.includes(s.slug));
   const relevantTestimonials = slug === 'pte' ? testimonials : testimonials.slice(0, 3);
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <Layout title={`${service.title} | Blossom Learning Centre`} description={service.summary}>
+    <Layout title={`${t(service.title)} | Blossom Learning Centre`} description={t(service.summary)}>
       {/* Hero */}
       <section className="bg-paper-dim">
         <div className="container-page flex flex-col gap-10 py-16 sm:py-20">
           <div className="flex flex-col gap-5">
             <span className="eyebrow flex items-center gap-2 text-gold-700">
               <span className="h-px w-6 bg-gold-600" aria-hidden="true" />
-              English Language Preparation
+              {t("English Language Preparation")}
             </span>
-            <h1 className="max-w-2xl font-display text-4xl font-black uppercase leading-[1.05] tracking-tight text-brand-950 sm:text-5xl">
-              <span className="text-brand-700">{service.shortTitle}</span> Preparation, Built Around Real Practice
+            <h1 className="max-w-2xl font-display text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-brand-950 sm:text-5xl">
+              <span className="text-brand-700">{t(service.shortTitle)}</span> {t("Preparation, Built Around Real Practice")}
             </h1>
-            <p className="max-w-xl text-base leading-relaxed text-brand-500">{service.heroText}</p>
+            <p className="max-w-xl text-base leading-relaxed text-brand-500">{t(service.heroText)}</p>
             <div className="flex flex-wrap gap-4">
-              <Button to="/contact" size="lg" variant="accent">Book a Free Assessment</Button>
-              <Button to="#methodology" variant="secondary" size="lg">See Our Approach</Button>
+              <Button to="/contact" size="lg" variant="accent">{t("Book a Free Assessment")}</Button>
+              <Button to="#methodology" variant="secondary" size="lg">{t("See Our Approach")}</Button>
             </div>
             <Button to="/exam-strategies" variant="secondary" showArrow className="w-fit">
-              View {service.shortTitle} Exam Strategies
+              {t('View {name} Exam Strategies', { name: t(service.shortTitle) })}
             </Button>
           </div>
 
@@ -49,24 +51,24 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
             <div className="relative overflow-hidden rounded-xl2 shadow-card lg:row-span-2">
               <img
                 src={heroImages[slug]}
-                alt={`${service.shortTitle} preparation session at BLC`}
+                alt={t('{name} preparation session at BLC', { name: t(service.shortTitle) })}
                 loading="eager"
                 className="h-full min-h-[16rem] w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-brand-950/10 to-transparent" />
               <p className="absolute bottom-4 left-4 right-4 text-sm font-semibold text-white">
-                Our {service.shortTitle} sessions focus on consistent, structured practice — not shortcuts.
+                {t('Our {name} sessions focus on consistent, structured practice — not shortcuts.', { name: t(service.shortTitle) })}
               </p>
             </div>
 
             <div className="flex flex-col justify-center gap-3 rounded-xl2 bg-gold-500 p-6 text-brand-950 shadow-card">
               <div>
-                <p className="font-display text-2xl font-black">4 / 4</p>
-                <p className="text-xs font-semibold uppercase tracking-wide">Modules Covered Every Session</p>
+                <p className="font-display text-2xl font-semibold">4 / 4</p>
+                <p className="text-xs font-semibold uppercase tracking-wide">{t("Modules Covered Every Session")}</p>
               </div>
               <div>
-                <p className="font-display text-2xl font-black">{service.process.length}-Step</p>
-                <p className="text-xs font-semibold uppercase tracking-wide">Structured Preparation Plan</p>
+                <p className="font-display text-2xl font-semibold">{service.process.length}-Step</p>
+                <p className="text-xs font-semibold uppercase tracking-wide">{t("Structured Preparation Plan")}</p>
               </div>
             </div>
 
@@ -89,7 +91,7 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
                 </svg>
               </span>
               <p className="absolute bottom-4 left-4 right-4 text-sm font-semibold text-white">
-                See how {relevantTestimonials[0]?.name} prepared with BLC — watch on YouTube
+                {t('See how {name} prepared with BLC — watch on YouTube', { name: relevantTestimonials[0]?.name ?? '' })}
               </p>
             </a>
 
@@ -106,11 +108,11 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
                   ))}
                 </div>
                 <p className="text-sm font-semibold">
-                  Real results from {relevantTestimonials.length}+ students on our YouTube channel
+                  {t('Real results from {count}+ students on our YouTube channel', { count: relevantTestimonials.length })}
                 </p>
               </div>
               <Button href={`https://www.youtube.com/watch?v=${relevantTestimonials[0]?.youtubeId}`} variant="ghost" className="w-fit">
-                View Results
+                {t("View Results")}
               </Button>
             </div>
           </div>
@@ -122,7 +124,7 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
       {/* Methodology tabs */}
       <section id="methodology" className="scroll-mt-24 py-20 sm:py-28">
         <div className="container-page flex flex-col gap-10">
-          <SectionHeading eyebrow="Our Approach" heading="How BLC Prepares You" />
+          <SectionHeading eyebrow={t("Our Approach")} heading={t("How BLC Prepares You")} />
           <div className="flex flex-wrap gap-3">
             {service.howWeHelp.map((step, i) => (
               <button
@@ -149,7 +151,7 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
             </div>
             <img
               src={heroImages[slug]}
-              alt={`${service.shortTitle} practice session`}
+              alt={t('{name} practice session', { name: t(service.shortTitle) })}
               loading="lazy"
               className="aspect-[4/3] w-full rounded-xl2 object-cover"
             />
@@ -160,7 +162,7 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
       {/* English programs — explore the others */}
       <section className="bg-paper-dim py-20 sm:py-28">
         <div className="container-page flex flex-col gap-12">
-          <SectionHeading eyebrow="English Programs" heading="Programs for Every Goal" align="center" />
+          <SectionHeading eyebrow={t("English Programs")} heading={t("Programs for Every Goal")} align="center" />
           <div className="grid gap-6 sm:grid-cols-3">
             {englishServices.map((s) => (
               <div
@@ -176,18 +178,18 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
                 >
                   <Icon name={s.icon} className="h-5 w-5" />
                 </span>
-                <h3 className={`font-display text-lg font-extrabold uppercase tracking-tight ${s.slug === slug ? 'text-white' : 'text-brand-950'}`}>
-                  {s.shortTitle}
+                <h3 className={`font-display text-lg font-semibold tracking-[-0.03em] ${s.slug === slug ? 'text-white' : 'text-brand-950'}`}>
+                  {t(s.shortTitle)}
                 </h3>
                 <p className={`flex-1 text-sm leading-relaxed ${s.slug === slug ? 'text-brand-100' : 'text-brand-500'}`}>
-                  {s.summary}
+                  {t(s.summary)}
                 </p>
                 <Button
                   to={`/services/${s.slug}`}
                   variant={s.slug === slug ? 'accent' : 'secondary'}
                   className="w-fit"
                 >
-                  {s.slug === slug ? "You're Viewing This" : 'Explore'}
+                  {s.slug === slug ? t("You're Viewing This") : t('Explore')}
                 </Button>
               </div>
             ))}
@@ -199,15 +201,15 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
       <section className="py-20 sm:py-28">
         <div className="container-page grid gap-12 lg:grid-cols-2">
           <div className="flex flex-col gap-4">
-            <SectionHeading eyebrow="Overview" heading="Introduction" description={service.intro} />
+            <SectionHeading eyebrow={t("Overview")} heading={t("Introduction")} description={t(service.intro)} />
           </div>
           <div className="flex flex-col gap-4">
-            <SectionHeading eyebrow="Is This For You" heading="Who It Is For" />
+            <SectionHeading eyebrow={t("Is This For You")} heading={t("Who It Is For")} />
             <ul className="flex flex-col gap-3">
               {service.whoFor.map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-brand-700" />
-                  <span className="text-sm leading-relaxed text-brand-800/85">{item}</span>
+                  <span className="text-sm leading-relaxed text-brand-800/85">{t(item)}</span>
                 </li>
               ))}
             </ul>
@@ -219,9 +221,9 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
       <section className="bg-paper-dim py-20 sm:py-28">
         <div className="container-page flex flex-col gap-12">
           <SectionHeading
-            eyebrow="Real Results"
-            heading="Results Shared by Our Students"
-            description="Genuine outcomes posted by BLC students on our YouTube channel — not paid endorsements."
+            eyebrow={t("Real Results")}
+            heading={t("Results Shared by Our Students")}
+            description={t("Genuine outcomes posted by BLC students on our YouTube channel — not paid endorsements.")}
             align="center"
           />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -235,15 +237,15 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
       {/* FAQ */}
       <section className="py-20 sm:py-28">
         <div className="container-page flex flex-col gap-10">
-          <SectionHeading eyebrow="FAQ" heading="Frequently Asked Questions" align="center" />
+          <SectionHeading eyebrow={t("FAQ")} heading={t("Frequently Asked Questions")} align="center" />
           <div className="mx-auto flex w-full max-w-3xl flex-col gap-4">
             {service.faqs.map((faq) => (
               <details key={faq.q} className="group rounded-xl2 border border-brand-900/10 bg-white p-5 shadow-card">
                 <summary className="focus-ring flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-bold text-brand-950">
-                  {faq.q}
+                  {t(faq.q)}
                   <Icon name="arrow" className="h-4 w-4 shrink-0 rotate-90 text-gold-700 transition-transform group-open:rotate-[-90deg]" />
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-brand-800/80">{faq.a}</p>
+                <p className="mt-3 text-sm leading-relaxed text-brand-800/80">{t(faq.a)}</p>
               </details>
             ))}
           </div>
@@ -256,13 +258,13 @@ export default function EnglishProgram({ slug }: { slug: ServiceSlug }) {
           <SectionHeading
             light
             align="center"
-            eyebrow="Get Started"
-            heading={`Ready to Begin Your ${service.shortTitle} Preparation?`}
-            description="Book a free assessment and we'll recommend a realistic study plan."
+            eyebrow={t("Get Started")}
+            heading={t('Ready to Begin Your {name} Preparation?', { name: t(service.shortTitle) })}
+            description={t("Book a free assessment and we'll recommend a realistic study plan.")}
           />
           <div className="flex flex-wrap justify-center gap-4">
-            <Button to="/contact" variant="accent">Book a Free Assessment</Button>
-            <Button to="/services" variant="ghost">View All Services</Button>
+            <Button to="/contact" variant="accent">{t("Book a Free Assessment")}</Button>
+            <Button to="/services" variant="ghost">{t("View All Services")}</Button>
           </div>
         </div>
       </section>

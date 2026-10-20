@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { socialLinks, instagramPosts } from '../data/site';
 import Icon from './Icon';
+import { useT } from '../i18n';
 
 declare global {
   interface Window {
@@ -24,6 +25,7 @@ function loadInstagramEmbedScript(onLoad: () => void) {
 }
 
 export default function SocialGallery() {
+  const t = useT();
   useEffect(() => {
     if (instagramPosts.length === 0) return;
     loadInstagramEmbedScript(() => window.instgrm?.Embeds.process());
@@ -34,8 +36,7 @@ export default function SocialGallery() {
       <div className="overflow-hidden rounded-xl2 border border-brand-900/10 bg-white shadow-card">
         <div className="flex flex-col items-center gap-4 px-6 py-16 text-center">
           <p className="max-w-md text-sm leading-relaxed text-brand-800/70">
-            Our latest photos and updates from Instagram and Facebook will appear here shortly.
-            In the meantime, follow us directly:
+            {t("Our latest photos and updates from Instagram and Facebook will appear here shortly. In the meantime, follow us directly:")}
           </p>
           <div className="flex items-center gap-3">
             <a
@@ -45,7 +46,7 @@ export default function SocialGallery() {
               className="focus-ring inline-flex items-center gap-2 rounded-md border border-brand-900/15 px-4 py-2 text-sm font-semibold text-brand-900 transition-colors hover:border-brand-900/30"
             >
               <Icon name="instagram" className="h-4 w-4" />
-              Instagram
+              {t("Instagram")}
             </a>
             <a
               href={socialLinks.facebook}
@@ -54,7 +55,7 @@ export default function SocialGallery() {
               className="focus-ring inline-flex items-center gap-2 rounded-md border border-brand-900/15 px-4 py-2 text-sm font-semibold text-brand-900 transition-colors hover:border-brand-900/30"
             >
               <Icon name="facebook" className="h-4 w-4" />
-              Facebook
+              {t("Facebook")}
             </a>
           </div>
         </div>

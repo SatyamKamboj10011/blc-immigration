@@ -1,4 +1,5 @@
 import { siteInfo } from '../data/site';
+import { useT } from '../i18n';
 
 const digitsOnly = siteInfo.phone.replace(/[^0-9]/g, '');
 const whatsappHref = `https://wa.me/${digitsOnly}?text=${encodeURIComponent(
@@ -6,12 +7,13 @@ const whatsappHref = `https://wa.me/${digitsOnly}?text=${encodeURIComponent(
 )}`;
 
 export default function WhatsAppButton() {
+  const t = useT();
   return (
     <a
       href={whatsappHref}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with Blossom Learning Centre on WhatsApp"
+      aria-label={t("Chat with Blossom Learning Centre on WhatsApp")}
       className="focus-ring fixed bottom-4 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 sm:bottom-5 sm:right-5 sm:h-14 sm:w-14"
     >
       <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6" aria-hidden="true">

@@ -1,6 +1,8 @@
 import { VideoTestimonial } from '../data/site';
+import { useT } from '../i18n';
 
 export default function SuccessStoryCard({ name, outcome, youtubeId }: VideoTestimonial) {
+  const t = useT();
   return (
     <a
       href={`https://www.youtube.com/watch?v=${youtubeId}`}
@@ -24,9 +26,9 @@ export default function SuccessStoryCard({ name, outcome, youtubeId }: VideoTest
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-1.5 p-5">
-        <h3 className="font-display text-base font-extrabold uppercase tracking-tight text-brand-950">{name}</h3>
+        <h3 className="font-display text-base font-semibold tracking-[-0.03em] text-brand-950">{name}</h3>
         <p className="text-sm leading-relaxed text-brand-500">{outcome}</p>
-        <span className="eyebrow mt-auto pt-2 text-gold-700">Watch on YouTube</span>
+        <span className="eyebrow mt-auto pt-2 text-gold-700">{t("Watch on YouTube")}</span>
       </div>
     </a>
   );

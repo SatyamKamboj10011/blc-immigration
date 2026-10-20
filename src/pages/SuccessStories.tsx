@@ -7,6 +7,7 @@ import SuccessStoryCard from '../components/SuccessStoryCard';
 import CTASection from '../components/CTASection';
 import Button from '../components/Button';
 import { successStories, testimonials } from '../data/site';
+import { useT } from '../i18n';
 
 type Filter = 'all' | 'visa' | 'english';
 
@@ -17,6 +18,7 @@ const filters: { key: Filter; label: string }[] = [
 ];
 
 export default function SuccessStories() {
+  const t = useT();
   const [filter, setFilter] = useState<Filter>('all');
 
   const items = useMemo(() => {
@@ -27,24 +29,24 @@ export default function SuccessStories() {
 
   return (
     <Layout
-      title="Success Stories | Blossom Learning Centre"
-      description="Real student outcomes shared by Blossom Learning Centre (BLC) — visa approvals and PTE results, from BLC's own YouTube channel."
+      title={t("Success Stories | Blossom Learning Centre")}
+      description={t("Real student outcomes shared by Blossom Learning Centre (BLC) — visa approvals and PTE results, from BLC's own YouTube channel.")}
     >
       <Hero
-        eyebrow="Success Stories"
-        headline="Students We've Supported"
-        supportingText="Real outcomes shared by BLC students on our YouTube channel — visa approvals and English test results, in their own words."
+        eyebrow={t("Success Stories")}
+        headline={t("Students We've Supported")}
+        supportingText={t("Real outcomes shared by BLC students on our YouTube channel — visa approvals and English test results, in their own words.")}
         image="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80"
-        imageAlt="Graduating students celebrating together"
+        imageAlt={t("Graduating students celebrating together")}
         compact
       />
       <Breadcrumbs items={[{ label: 'Success Stories' }]} />
 
       <section className="py-20 sm:py-28">
         <div className="container-page flex flex-col gap-10">
-          <SectionHeading eyebrow="Real Outcomes" heading="Browse Student Stories" align="center" />
+          <SectionHeading eyebrow={t("Real Outcomes")} heading={t("Browse Student Stories")} align="center" />
 
-          <div role="tablist" aria-label="Filter success stories" className="mx-auto flex flex-wrap justify-center gap-2">
+          <div role="tablist" aria-label={t("Filter success stories")} className="mx-auto flex flex-wrap justify-center gap-2">
             {filters.map((f) => (
               <button
                 key={f.key}
@@ -58,7 +60,7 @@ export default function SuccessStories() {
                     : 'border-brand-800/25 bg-white text-brand-800 hover:border-brand-800/60'
                 }`}
               >
-                {f.label}
+                {t(f.label)}
               </button>
             ))}
           </div>
@@ -71,8 +73,8 @@ export default function SuccessStories() {
         </div>
       </section>
 
-      <CTASection headline="Ready to Start Your Own Journey?" text="Speak with the BLC team about your study and overseas education options.">
-        <Button to="/contact" variant="accent">Book a Consultation</Button>
+      <CTASection headline={t("Ready to Start Your Own Journey?")} text={t("Speak with the BLC team about your study and overseas education options.")}>
+        <Button to="/contact" variant="accent">{t("Book a Consultation")}</Button>
       </CTASection>
     </Layout>
   );
